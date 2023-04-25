@@ -1,7 +1,5 @@
 #lang info
 
-(define collection 'multi)
-
 (define deps '("base"))
 
 (define name "ralgo")
