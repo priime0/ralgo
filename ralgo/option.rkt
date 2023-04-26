@@ -88,4 +88,10 @@
 
   ;; `option-unwrap-or-else`
   (check-equal? (option-unwrap-or-else (some 10) (thunk 5)) 10)
-  (check-equal? (option-unwrap-or-else (none) (thunk "hello")) "hello"))
+  (check-equal? (option-unwrap-or-else (none) (thunk "hello")) "hello")
+
+  ;; mutation
+  (define some1 (some 5))
+  (check-equal? some1 (some 5))
+  (set-some-val! some1 6)
+  (check-equal? some1 (some 6)))
