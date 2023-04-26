@@ -9,3 +9,7 @@ version 1.0+.
 
 Options represent "Maybe" values -- values that can either be of something or
 nothing.
+
+## Queues
+
+We implement standard FIFO queues with a simple algorithm.
