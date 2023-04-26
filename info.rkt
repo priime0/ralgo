@@ -8,4 +8,4 @@
 (define pkg-authors '(priime0))
 (define homepage "https://github.com/priime0/ralgo")
 (define version "0.1")
-(define license '(MIT))
+(define license 'MIT)
