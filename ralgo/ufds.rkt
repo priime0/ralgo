@@ -73,14 +73,14 @@
   (check-false (ufds-same-set? ufds1 1 2))
   (check-false (ufds-same-set? ufds1 3 4))
 
-  (ufds-union! ufds1 1 3)
+  (void (ufds-union! ufds1 1 3))
 
   (check-true (ufds-same-set? ufds1 1 3))
   (check-false (ufds-same-set? ufds1 0 1))
   (check-false (ufds-same-set? ufds1 1 2))
   (check-false (ufds-same-set? ufds1 3 4))
 
-  (ufds-union! ufds1 3 0)
+  (void (ufds-union! ufds1 3 0))
 
   (check-true (ufds-same-set? ufds1 1 3))
   (check-true (ufds-same-set? ufds1 3 1))
@@ -89,12 +89,12 @@
   (check-false (ufds-same-set? ufds1 1 2))
   (check-false (ufds-same-set? ufds1 2 4))
 
-  (ufds-union! ufds1 2 4)
+  (void (ufds-union! ufds1 2 4))
 
   (check-true (ufds-same-set? ufds1 2 4))
   (check-false (ufds-same-set? ufds1 2 3))
 
-  (ufds-union! ufds1 0 2)
+  (void (ufds-union! ufds1 0 2))
 
   (check-true (ufds-same-set? ufds1 0 1))
   (check-true (ufds-same-set? ufds1 1 2))
