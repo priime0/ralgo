@@ -7,7 +7,7 @@
                      "rackunit-doc"))
 
 (define name "ralgo")
-(define collection "ralgo")
+(define collection 'multi)
 (define pkg-desc "Convenient implementations of various data structures for Racket")
 (define pkg-authors '(priime0))
 (define homepage "https://github.com/priime0/ralgo")
@@ -15,4 +15,3 @@
 (define license 'MIT)
 
 (define test-include-paths 'all)
-(define scribblings '(("scribblings/manual.scrbl" ())))
