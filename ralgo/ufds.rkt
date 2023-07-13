@@ -1,4 +1,8 @@
-#lang racket
+#lang racket/base
+
+(require racket/contract/base
+         racket/function)
+
 
 ;; Implementation of a Union Find Disjoint Set / Disjoint Set Union
 

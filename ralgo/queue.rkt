@@ -1,4 +1,8 @@
-#lang racket
+#lang racket/base
+
+(require racket/contract/base
+         racket/list)
+
 
 ;; Implementation of a simple immutable queue in Racket
 
@@ -67,6 +71,7 @@
   (define front (queue-front q))
   (define back (queue-back q))
   (or (cons? (member x front)) (cons? (member x back))))
+
 
 (module+ test
   (require rackunit)

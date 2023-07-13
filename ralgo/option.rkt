@@ -1,4 +1,8 @@
-#lang racket
+#lang racket/base
+
+(require racket/contract/base
+         racket/match)
+
 
 ;; Implementation of Option
 
@@ -54,6 +58,7 @@
 
 (module+ test
   (require rackunit)
+  (require racket/function)
 
   ;; `option?` pass
   (check-true (option? (none)))
