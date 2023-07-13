@@ -23,5 +23,8 @@ jobs:
         variant: 'CS'
         version: '8.9'
 
+    - name: Install Library
+      run: raco pkg install
+
     - name: Run Tests
       run: raco test ralgo
