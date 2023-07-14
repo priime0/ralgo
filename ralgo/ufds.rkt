@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require racket/contract/base
+(require racket/contract
          racket/function)
 
 
@@ -16,13 +16,13 @@
 (struct ufds (parents ranks) #:transparent)
 
 ;; Create a new UFDS
-(define (make-ufds num)
+(define/contract (make-ufds num)
   (integer? . -> . ufds?)
   (ufds (build-vector num identity)
         (build-vector num identity)))
 
 ;; Find the set that the given index belongs to
-(define (ufds-find ds num)
+(define/contract (ufds-find ds num)
   (ufds? integer? . -> . integer?)
   (define parents (ufds-parents ds))
   (define current-index (vector-ref parents num))
@@ -31,7 +31,7 @@
       (ufds-find ds current-index)))
 
 ;; Find the set that the given index belongs to, and optimize the current tree
-(define (ufds-find! ds num)
+(define/contract (ufds-find! ds num)
   (ufds? integer? . -> . integer?)
   (define parents (ufds-parents ds))
   (define current-index (vector-ref parents num))
@@ -43,14 +43,14 @@
         root)))
 
 ;; Do the two indices belong to the same set?
-(define (ufds-same-set? ds num1 num2)
+(define/contract (ufds-same-set? ds num1 num2)
   (ufds? integer? integer? . -> . boolean?)
   (= (ufds-find ds num1)
      (ufds-find ds num2)))
 
 ;; Union two sets given by their indices
 ;; SIDE EFFECT: Updates the representatives field to union the two indices
-(define (ufds-union! ds num1 num2)
+(define/contract (ufds-union! ds num1 num2)
   (ufds? integer? integer? . -> . ufds?)
   (define parents (ufds-parents ds))
   (define ranks (ufds-ranks ds))

@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require racket/contract/base
+(require racket/contract
          racket/match)
 
 
@@ -22,19 +22,19 @@
 ;; Returns the first option `opt` if it is a `some?` value, else returns the
 ;; second option `optb`. The second argument is eagerly evaluated; consider
 ;; using `option-or-else` if the evaluation of `optb` is inefficient.
-(define (option-or opt optb)
+(define/contract (option-or opt optb)
   (option? option? . -> . option?)
   (if (some? opt) opt optb))
 
 ;; Returns `opt` if it is a `some?` value, else returns the value produced by
 ;; the `producer` function.
-(define (option-or-else opt producer)
+(define/contract (option-or-else opt producer)
   (option? (-> option?) . -> . option?)
   (if (some? opt) opt (producer)))
 
 ;; Unwrap the value contained in the option if it is a `some?`, else surface
 ;; an error.
-(define (option-unwrap opt)
+(define/contract (option-unwrap opt)
   (option? . -> . any)
   (match opt
     [(some x) x]
@@ -42,7 +42,7 @@
 
 ;; Unwrap the value contained in the option if it is a `some?`, else return
 ;; the `default` value.
-(define (option-unwrap-or opt default)
+(define/contract (option-unwrap-or opt default)
   (option? any/c . -> . any)
   (match opt
     [(some x) x]
@@ -50,7 +50,7 @@
 
 ;; Unwrap the value contained in the option if it is a `some?`, else return
 ;; the value produced by the `producer` function.
-(define (option-unwrap-or-else opt producer)
+(define/contract (option-unwrap-or-else opt producer)
   (option? (-> any) . -> . any)
   (match opt
     [(some x) x]

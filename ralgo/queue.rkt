@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require racket/contract/base
+(require racket/contract
          racket/list)
 
 
@@ -15,29 +15,29 @@
 (struct queue (front back) #:transparent)
 
 ;; Create an empty Queue
-(define (empty-queue)
+(define/contract (empty-queue)
   (-> queue?)
   (queue '() '()))
 
 ;; Transform a list into a queue
-(define (list->queue l)
+(define/contract (list->queue l)
   (list? . -> . queue?)
   (queue l '()))
 
 ;; Transform the queue into a list
-(define (queue->list q)
+(define/contract (queue->list q)
   (queue? . -> . list?)
   (define front (queue-front q))
   (define back (queue-back q))
   (append front (reverse back)))
 
 ;; Add an element to the queue
-(define (queue-add q x)
+(define/contract (queue-add q x)
   (queue? any/c . -> . queue?)
   (struct-copy queue q [back (cons x (queue-back q))]))
 
 ;; Pop an element from the queue, returning the new queue
-(define (queue-pop q)
+(define/contract (queue-pop q)
   (queue? . -> . queue?)
   (define front (queue-front q))
   (define back (queue-back q))
@@ -47,7 +47,7 @@
     [else (error "Popped an empty queue")]))
 
 ;; Retrieve the element at the front of the queue
-(define (queue-top q)
+(define/contract (queue-top q)
   (queue? . -> . any)
   (define front (queue-front q))
   (define back (queue-back q))
@@ -57,16 +57,17 @@
     [else (error "No top for empty queue")]))
 
 ;; Is the queue empty?
-(define (queue-empty? q)
+(define/contract (queue-empty? q)
   (queue? . -> . boolean?)
   (and (empty? (queue-front q)) (empty? (queue-back q))))
 
 ;; Determine the length of the queue
-(define (queue-length q)
+(define/contract (queue-length q)
+  (queue? . -> . exact-nonnegative-integer?)
   (+ (length (queue-front q)) (length (queue-back q))))
 
 ;; Does the queue contain the given element?
-(define (queue-contains? q x)
+(define/contract (queue-contains? q x)
   (queue? any/c . -> . boolean?)
   (define front (queue-front q))
   (define back (queue-back q))
